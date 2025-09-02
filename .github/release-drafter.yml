@@ -1,0 +1,79 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+# If the PR has any of these labels, it will be excluded from the release notes
+exclude-labels:
+  - 'no-release'
+  - 'refactor/no-release'  # if you want to exclude refactors from release notes
+
+categories:
+  - title: '🚀 Features'
+    labels:
+      - 'feature'
+      - 'enhancement'
+      - 'feat'
+  - title: '⚠️ Breaking Changes'
+    labels:
+      - 'major'
+      - 'breaking'
+  - title: '🐛 Bug Fixes'
+    labels:
+      - 'fix'
+      - 'bugfix'
+      - 'bug'
+  - title: '⚡ Performance'
+    labels:
+      - 'perf'
+  - title: '📝 Documentation'
+    labels:
+      - 'docs'
+  - title: '🔧 Refactors'
+    labels:
+      - 'refactor'
+      - 'refactor/code'
+      - 'refactor/tests'
+  - title: '🧰 Maintenance'
+    labels:
+      - 'chore'
+      - 'ci'
+      - 'deps'
+      - 'infra'
+
+change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+change-title-escapes: '\<*_&'
+
+# How to resolve version bumps from PR labels
+# NOTE: refactor **not** included in major/minor/patch lists by default.
+# Use explicit refactor-major/refactor-minor/refactor-patch labels for bumping,
+# or use refactor/no-release to exclude refactor from version resolution.
+version-resolver:
+  major:
+    labels:
+      - 'major'
+      - 'breaking'
+      - 'refactor-major'
+  minor:
+    labels:
+      - 'minor'
+      - 'feature'
+      - 'enhancement'
+      - 'refactor-minor'
+  patch:
+    labels:
+      - 'patch'
+      - 'fix'
+      - 'bugfix'
+      - 'refactor-patch'
+  default: patch
+
+no-changes-template: |
+  ## Changes
+
+  _No notable changes in this release — nothing matched your categories/labels._
+
+template: |
+  ## Changes
+
+  $CHANGES
+
+  ---
+  _Thanks to everyone who contributed — big love to every PR author! ❤️_
