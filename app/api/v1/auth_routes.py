@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from fastapi import status
 from starlette.responses import JSONResponse
 
-from app.endpoints.dependencies import get_auth_service
+from app.api.dependencies import get_auth_service
 from app.schemas.auth_schema import (
     RegisterRequestSchema,
     LoginRequestSchema,
