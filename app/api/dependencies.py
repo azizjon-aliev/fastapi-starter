@@ -20,7 +20,6 @@ async def get_user_repository(session: AsyncSession = Depends(get_session)) -> U
     return UserRepository(session=session)
 
 
-
 # Services
 async def get_auth_service(
     user_repository: UserRepository = Depends(get_user_repository),
@@ -62,5 +61,3 @@ async def get_current_user(
         )
 
     return user
-
-
