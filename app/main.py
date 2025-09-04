@@ -5,8 +5,8 @@ from loguru import logger
 from starlette.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
-from app.endpoints.middlewares import RateLimitMiddleware, ExceptionMiddleware
-from app.endpoints.v1 import router as v1_router
+from app.api.middlewares import RateLimitMiddleware, ExceptionMiddleware
+from app.api.v1 import router as v1_router
 from app.utils import startup_application, shutdown_application
 
 
