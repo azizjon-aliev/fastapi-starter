@@ -1,6 +1,5 @@
 # fastapi-starter
 
-[![Build Status](https://img.shields.io/github/workflow/status/azizjon-aliev/fastapi-starter/CI?style=for-the-badge&label=Build&logo=github&logoColor=white&color=success)](https://github.com/azizjon-aliev/fastapi-starter/actions)
 [![License: MIT](https://img.shields.io/badge/license-MIT-success.svg?style=for-the-badge)](/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/azizjon-aliev/fastapi-starter?style=for-the-badge&logo=github&logoColor=white&color=success)](https://github.com/azizjon-aliev/fastapi-starter/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/azizjon-aliev/fastapi-starter?style=for-the-badge&logo=github&logoColor=white&color=success)](https://github.com/azizjon-aliev/fastapi-starter/network/members)
