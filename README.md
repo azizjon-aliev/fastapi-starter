@@ -197,15 +197,11 @@ If you'd like, I can add `pre-commit` config, initial tests, or CI pipeline — 
 
 --- 
 
-## 📄 License
-
-MIT
-
----
-
 ## ✍️ Contact
 
 Maintained by Azizjon — PRs, issues, ideas are welcome.
+
+---
 
 ## Contributors ✨
 
