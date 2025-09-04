@@ -1,0 +1,27 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "azizjon-aliev",
+      "name": "Azizjon Aliev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/86987889?v=4",
+      "profile": "https://github.com/azizjon-aliev",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "fastapi-starter",
+  "projectOwner": "azizjon-aliev"
+}
