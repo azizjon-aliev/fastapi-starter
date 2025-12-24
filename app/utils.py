@@ -4,7 +4,7 @@ from loguru import logger
 from starlette import status
 from starlette.responses import JSONResponse
 from app.core.config import settings
-from app.db.session import engine, Base
+from app.db.session import engine
 from app.factories import cache_factory
 from app.core.logging import setup_logging
 
@@ -70,11 +70,6 @@ async def startup_application(app_local: FastAPI) -> None:
     if not hasattr(app_local.state, "db_engine"):
         logger.info("🔧 Setting up database engine...")
         app_local.state.db_engine = engine
-
-    async with app_local.state.db_engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-
-    logger.info("✅ Database initialized and tables created.")
 
 
 async def shutdown_application(app_local: FastAPI) -> None:
