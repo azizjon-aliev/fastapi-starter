@@ -1,14 +1,12 @@
-import sys
 from functools import wraps
-
 from fastapi import FastAPI
 from loguru import logger
 from starlette import status
 from starlette.responses import JSONResponse
-
 from app.core.config import settings
 from app.db.session import engine, Base
 from app.factories import cache_factory
+from app.core.logging import setup_logging
 
 
 def rate_limit(
@@ -57,12 +55,7 @@ def rate_limit(
 async def startup_application(app_local: FastAPI) -> None:
     """Initialize the Redis cache and database engine/session maker."""
 
-    # Configure loguru logger
-    LOG_LEVEL = "DEBUG" if settings.app_debug else "INFO"
-    logger.add(sys.stdout, level=LOG_LEVEL)
-    logger.add(
-        "logs/app.log", level=LOG_LEVEL, rotation="10 MB", retention="7 days", compression="zip"
-    )
+    setup_logging()
 
     # Initialize Redis cache
     if not hasattr(app_local.state, "cache"):

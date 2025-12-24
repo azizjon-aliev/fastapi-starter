@@ -5,15 +5,18 @@ from loguru import logger
 from starlette.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
-from app.api.middlewares import RateLimitMiddleware, ExceptionMiddleware, SwaggerBasicAuthMiddleware
+from app.api.middlewares import (
+    RateLimitMiddleware,
+    ExceptionMiddleware,
+    SwaggerBasicAuthMiddleware,
+    RequestIDMiddleware,
+)
 from app.api.v1 import router as v1_router
 from app.utils import startup_application, shutdown_application
 
 
 @asynccontextmanager
 async def lifespan(app_local: FastAPI):
-    logger.info("Startup application...")
-
     await startup_application(app_local)
 
     yield
@@ -42,6 +45,7 @@ app.add_middleware(
     allow_methods=settings.cors_allowed_methods,
     allow_headers=settings.cors_allowed_headers,
 )
+app.add_middleware(RequestIDMiddleware)
 app.add_middleware(RateLimitMiddleware)
 app.add_middleware(ExceptionMiddleware)
 app.add_middleware(SwaggerBasicAuthMiddleware)

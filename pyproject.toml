@@ -8,6 +8,7 @@ dependencies = [
     "aiocache[redis]>=0.12.3",
     "alembic>=1.16.4",
     "asyncpg>=0.30.0",
+    "contextvars>=2.4",
     "fastapi[all]>=0.116.1",
     "loguru>=0.7.3",
     "passlib[bcrypt]>=1.7.4",

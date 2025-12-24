@@ -7,6 +7,20 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import JSONResponse, Response
 
 from app.core.config import settings
+from app.core.logging import request_id_var
+import uuid
+
+
+class RequestIDMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request, call_next):
+        rid = request.headers.get("X-Request-ID") or str(uuid.uuid4())
+        token = request_id_var.set(rid)
+        try:
+            response = await call_next(request)
+            response.headers["X-Request-ID"] = rid
+            return response
+        finally:
+            request_id_var.reset(token)
 
 
 class RateLimitMiddleware(BaseHTTPMiddleware):

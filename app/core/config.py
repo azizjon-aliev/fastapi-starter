@@ -48,6 +48,15 @@ class Settings(BaseSettings):
     cache_port: int = 6379
     cache_db: int = 0
 
+    # Logging
+    log_level: str = "INFO"
+    log_file_level: str = "DEBUG"
+    log_file_path: str = "logs/app_{time:YYYY-MM-DD}.log"
+    log_rotation: str = "00:00"
+    log_retention: str = "30 days"
+    log_compression: str = "zip"
+    log_serialize: bool = False
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
