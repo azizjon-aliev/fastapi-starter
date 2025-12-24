@@ -1,7 +1,10 @@
+import base64
+import secrets
+
 from loguru import logger
 from starlette import status
 from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.responses import JSONResponse
+from starlette.responses import JSONResponse, Response
 
 from app.core.config import settings
 
@@ -51,3 +54,40 @@ class ExceptionMiddleware(BaseHTTPMiddleware):
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 content={"detail": detail},
             )
+
+
+class SwaggerBasicAuthMiddleware(BaseHTTPMiddleware):
+    """Middleware to protect Swagger UI and OpenAPI endpoints with Basic Auth."""
+
+    PROTECTED_PATHS = {"/docs", "/redoc", "/openapi.json"}
+
+    async def dispatch(self, request, call_next):
+        if request.url.path not in self.PROTECTED_PATHS:
+            return await call_next(request)
+
+        auth_header = request.headers.get("Authorization")
+        if not auth_header or not auth_header.startswith("Basic "):
+            return self._unauthorized_response()
+
+        try:
+            encoded_credentials = auth_header.split(" ", 1)[1]
+            decoded_credentials = base64.b64decode(encoded_credentials).decode("utf-8")
+            username, password = decoded_credentials.split(":", 1)
+        except (ValueError, UnicodeDecodeError):
+            return self._unauthorized_response()
+
+        is_valid_username = secrets.compare_digest(username, settings.swagger_username)
+        is_valid_password = secrets.compare_digest(password, settings.swagger_password)
+
+        if not (is_valid_username and is_valid_password):
+            return self._unauthorized_response()
+
+        return await call_next(request)
+
+    @staticmethod
+    def _unauthorized_response() -> Response:
+        return Response(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            content="Unauthorized",
+            headers={"WWW-Authenticate": "Basic realm='Swagger UI'"},
+        )

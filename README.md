@@ -135,6 +135,15 @@ uv run uvicorn app.main:app --reload
 
 Both are enabled by default for local and containerized environments.
 
+### Swagger Basic Auth
+
+Swagger UI and Redoc endpoints are protected with HTTP Basic Authentication. Configure credentials via environment variables:
+
+```bash
+SWAGGER_USERNAME=admin
+SWAGGER_PASSWORD=your_secure_password
+```
+
 ---
 
 ## ⚙️ Configuration & env
@@ -158,8 +167,13 @@ Say which one you want and I’ll scaffold it.
 ## 🧰 Development tools
 
 * Linter: **ruff** (already in the project)
-* No `pre-commit` configured yet — recommended to add for consistent commits
+* **pre-commit** hooks configured (ruff lint + format, trailing whitespace, etc.)
 * `uv` — local helper tool included in this repo (venv, run commands, sync deps)
+
+To install pre-commit hooks:
+```bash
+uv run pre-commit install
+```
 
 ---
 
@@ -195,7 +209,7 @@ Contributions welcome! If you want to help:
 
 If you'd like, I can add `pre-commit` config, initial tests, or CI pipeline — tell me what to scaffold.
 
---- 
+---
 
 ## ✍️ Contact
 

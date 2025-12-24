@@ -26,6 +26,10 @@ class Settings(BaseSettings):
     rate_limit_requests: int = 100  # Max requests
     rate_limit_time_window: int = 60  # Time window in seconds
 
+    # Swagger Basic Auth
+    swagger_username: str = "admin"
+    swagger_password: str = "admin"
+
     # CORS
     cors_origins: list[str] = ["*"]
     cors_allowed_methods: list[str] = ["*"]

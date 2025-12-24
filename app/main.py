@@ -5,7 +5,7 @@ from loguru import logger
 from starlette.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
-from app.api.middlewares import RateLimitMiddleware, ExceptionMiddleware
+from app.api.middlewares import RateLimitMiddleware, ExceptionMiddleware, SwaggerBasicAuthMiddleware
 from app.api.v1 import router as v1_router
 from app.utils import startup_application, shutdown_application
 
@@ -44,6 +44,7 @@ app.add_middleware(
 )
 app.add_middleware(RateLimitMiddleware)
 app.add_middleware(ExceptionMiddleware)
+app.add_middleware(SwaggerBasicAuthMiddleware)
 
 
 # Include API routers
